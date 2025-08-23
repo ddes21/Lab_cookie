@@ -9,9 +9,9 @@ python wsgi.py
 ### How to build
 
 docker build -t cookie-app .
-docker run --rm -p 5000:5000 --name cookie cookie-app
+docker run --rm -p 9000:5000 --name cookie cookie-app
 
 
 ### Hosting
 
-app is hosted http://localhost:5000
+app is hosted http://localhost:9000
