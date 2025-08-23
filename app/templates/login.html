@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Secure Portal – Sign In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bg:#0f172a; --card:#111827; --muted:#9ca3af; --accent:#22d3ee; --ok:#10b981; --warn:#f59e0b; --err:#ef4444; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:linear-gradient(120deg,#0f172a 0%, #1f2937 100%); color:#e5e7eb; }
+    header { display:flex; align-items:center; justify-content:space-between; padding:16px 24px; backdrop-filter: blur(6px); background:rgba(17,24,39,.6); position:sticky; top:0; z-index:10; border-bottom:1px solid rgba(255,255,255,.06);}
+    .brand { display:flex; gap:12px; align-items:center; }
+    .logo { width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg, var(--accent), #a78bfa); box-shadow:0 0 20px rgba(34,211,238,.5); }
+    nav a { color:#cbd5e1; text-decoration:none; margin:0 10px; font-size:14px; }
+    nav a:hover { color:#fff; }
+    .wrap { display:grid; grid-template-columns: 1.1fr 0.9fr; gap:28px; padding:32px; max-width:1100px; margin:0 auto; }
+    .card { background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius:14px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+    .card h2 { margin:0 0 16px 0; font-weight:700; }
+    .pad { padding:22px; }
+    .muted { color: var(--muted); }
+    .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+    label { font-size:14px; color:#cbd5e1; display:block; margin-bottom:8px; }
+    input[type="text"], input[type="password"], input[type="email"] {
+      width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.08);
+      background:#0b1220; color:#e5e7eb; outline:none;
+    }
+    input::placeholder { color:#64748b; }
+    .btn { cursor:pointer; border:0; background:linear-gradient(135deg, var(--accent), #60a5fa);
+      color:#0b1220; font-weight:700; padding:12px 16px; border-radius:10px; }
+    .btn:hover { filter:brightness(1.05); }
+    .btn.ghost { background: transparent; color:#e5e7eb; border:1px solid rgba(255,255,255,.12); }
+    .row { display:flex; gap:12px; align-items:center; }
+    .kpi { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .kpi .item { background:#0b1220; border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:14px; }
+    .kpi .label { font-size:12px; color:#9ca3af; }
+    .kpi .val { font-size:18px; font-weight:700; }
+    details { background:#0b1220; border:1px solid rgba(255,255,255,.06); padding:14px; border-radius:10px; }
+    footer { color:#94a3b8; font-size:12px; text-align:center; padding:36px 16px; }
+    .tag { font-size:10px; border:1px solid rgba(255,255,255,.12); padding:4px 8px; border-radius:999px; }
+    .hr { height:1px; background:rgba(255,255,255,.06); margin:18px 0; }
+    .note { font-size:12px; color:#93c5fd; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <strong>Secure Portal</strong>
+      <span class="tag">beta</span>
+    </div>
+    <nav>
+      <a href="#">Docs</a>
+      <a href="#">Status</a>
+      <a href="#">Support</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card pad">
+      <h2>Welcome back</h2>
+      <p class="muted">Sign in to continue. Use <em>user/password123</em> .</p>
+      <form method="POST" style="margin-top:16px;">
+        <div class="grid2">
+          <div>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" placeholder="yourname" autocomplete="username" required />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+          </div>
+        </div>
+
+        <!-- harmless extra fields to add noise -->
+        <div class="grid2" style="margin-top:12px;">
+          <div>
+            <label for="otp">One-time code (optional)</label>
+            <input id="otp" name="otp" type="text" inputmode="numeric" placeholder="123456" />
+          </div>
+        </div>
+
+        <div class="row" style="justify-content:space-between; margin-top:14px;">
+          <label class="row" style="user-select:none;">
+            <input type="checkbox" style="accent-color:#22d3ee; width:16px; height:16px; margin-right:8px;"> Remember this device
+          </label>
+          <a href="#" class="note" onclick="alert('Password recovery is disabled in this lab.');return false;">Forgot password?</a>
+        </div>
+
+        <div class="row" style="margin-top:16px;">
+          <button class="btn" type="submit">Sign in</button>
+          <button class="btn ghost" type="button" onclick="alert('SSO unavailable in this environment');">Sign in with SSO</button>
+        </div>
+        <div class="hr"></div>
+        <p class="muted" style="font-size:12px;">By signing in you agree to the <a href="#" onclick="alert('Terms placeholder');return false;">Terms</a> and <a href="#" onclick="alert('Privacy placeholder');return false;">Privacy Policy</a>.</p>
+      </form>
+    </section>
+
+    <aside class="card pad">
+      <h2>System Overview</h2>
+      <div class="kpi" style="margin-top:10px;">
+        <div class="item"><div class="label">Active Sessions</div><div class="val">3</div></div>
+        <div class="item"><div class="label">Queue</div><div class="val">0</div></div>
+        <div class="item"><div class="label">Uptime</div><div class="val">99.9%</div></div>
+      </div>
+      <div class="hr"></div>
+      <details>
+        <summary>Release Notes (v0.4.7)</summary>
+        <ul>
+          <li>UI improvements and accessibility tweaks</li>
+          <li>Security patches (CVE-XXXX placeholder)</li>
+          <li>Stability enhancements</li>
+        </ul>
+      </details>
+      <div class="hr"></div>
+      <p class="muted">Need help? Contact support or visit the knowledge base.</p>
+    </aside>
+  </main>
+
+  <footer>
+    © 2025 Secure Portal, Inc. · All rights reserved · Build 0xA12F
+  </footer>
+</body>
+</html>

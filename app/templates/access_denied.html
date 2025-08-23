@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Access Denied</title>
+  <style>
+    body { margin:0; font-family: system-ui, sans-serif;
+           background:linear-gradient(135deg,#1e1e2f,#0d0d16); color:#eee; display:flex;
+           align-items:center; justify-content:center; height:100vh; }
+    .box { background:#1a1a2b; border:1px solid rgba(255,255,255,.1);
+           border-radius:12px; padding:32px; max-width:600px; text-align:center;
+           box-shadow:0 6px 24px rgba(0,0,0,.5); }
+    h1 { color:#ef4444; margin-bottom:12px; font-size:32px; }
+    p { color:#cbd5e1; margin:6px 0; }
+    .details { font-size:13px; color:#94a3b8; margin-top:18px; border-top:1px solid rgba(255,255,255,.08); padding-top:12px; }
+    .btn { display:inline-block; margin-top:18px; padding:10px 16px;
+           border-radius:8px; background:linear-gradient(135deg,#ef4444,#f87171);
+           color:white; text-decoration:none; font-weight:600; }
+    .btn:hover { filter:brightness(1.1); }
+    .ghost { background:transparent; border:1px solid rgba(255,255,255,.2); color:#eee; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>🚫 Access Denied</h1>
+    <p>You don’t have permission to view this page.</p>
+    <p>If you believe this is an error, please contact an administrator.</p>
+
+    <a href="/" class="btn">Return to Login</a>
+    <a href="/user" class="btn ghost">Back to Dashboard</a>
+
+    <div class="details">
+      Error Code: 403 · Timestamp: {{ timestamp }}
+    </div>
+  </div>
+</body>
+</html>

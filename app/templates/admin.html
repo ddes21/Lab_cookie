@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bg:#071019; --surface:#0b1526; --border:rgba(255,255,255,.08); --muted:#94a3b8; --accent:#22d3ee; --danger:#ef4444; --ok:#10b981; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:#e5e7eb; background:linear-gradient(120deg,#071019 0%, #0b1220 100%); }
+    header { padding:16px 22px; display:flex; align-items:center; justify-content:space-between; background:rgba(11,21,38,.7); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10; }
+    .wrap { padding:22px; max-width:1200px; margin:0 auto; display:grid; grid-template-columns: 260px 1fr; gap:18px; }
+    .aside, .panel { background: var(--surface); border:1px solid var(--border); border-radius:12px; }
+    .aside h3 { margin:0; padding:16px; border-bottom:1px solid var(--border); }
+    .list a { display:block; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,.04); color:#cbd5e1; text-decoration:none; }
+    .list a:hover { background:#091120; }
+    .panel { padding:16px; }
+    .muted { color: var(--muted); }
+    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .card { background:#091120; border:1px solid var(--border); border-radius:10px; padding:14px; }
+    table { width:100%; border-collapse: collapse; font-size:14px; }
+    th, td { text-align:left; padding:10px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .btn { cursor:pointer; border:0; background:linear-gradient(135deg, var(--accent), #60a5fa); color:#0b1220; font-weight:700; padding:10px 14px; border-radius:10px;}
+    .btn.danger { background:linear-gradient(135deg, var(--danger), #fb7185); color:white; }
+    .btn.ghost { background:transparent; border:1px solid var(--border); color:#e5e7eb; }
+    .pill { font-size:11px; border:1px solid rgba(255,255,255,.15); padding:4px 8px; border-radius:999px; }
+    footer { text-align:center; color:#94a3b8; font-size:12px; padding:20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Admin Dashboard</strong>
+    <nav>
+      <a href="/" class="pill">Switch User</a>
+      <a href="/logout" class="pill" style="margin-left:8px;">Logout</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <aside class="aside">
+      <h3>Admin Menu</h3>
+      <div class="list">
+        <a href="#">Overview</a>
+        <a href="#">Users</a>
+        <a href="#">Roles</a>
+        <a href="#">Audit Logs</a>
+        <a href="#">System Health</a>
+        <a href="#">Integrations</a>
+        <a href="#">Backups</a>
+        <a href="#">Danger Zone</a>
+      </div>
+    </aside>
+
+    <section>
+      <div class="panel">
+        <h2>System Overview</h2>
+        <p class="muted">Administrative controls and metrics. (Demo content—non-functional.)</p>
+        <div class="grid3" style="margin-top:12px;">
+          <div class="card"><div class="muted">Nodes</div><div style="font-size:22px; font-weight:700;">4</div></div>
+          <div class="card"><div class="muted">Requests/min</div><div style="font-size:22px; font-weight:700;">168</div></div>
+          <div class="card"><div class="muted">Errors</div><div style="font-size:22px; font-weight:700; color:#ef4444;">0</div></div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:14px;">
+        <h3>User Management</h3>
+        <table>
+          <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td>admin</td><td>Administrator</td><td><span class="pill">active</span></td><td>
+              <button class="btn">Reset PW</button>
+              <button class="btn ghost">Disable</button>
+            </td></tr>
+            <tr><td>user</td><td>Member</td><td><span class="pill">active</span></td><td>
+              <button class="btn">Promote</button>
+              <button class="btn danger">Delete</button>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel" style="margin-top:14px;">
+        <h3>Congratulations!</h3>
+        <p class="muted">Here is your flag CTF{C00kie_m0nster}</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn danger" onclick="alert('Demo only');">Purge All Sessions</button>
+          <button class="btn danger" onclick="alert('Demo only');">Drop Database</button>
+          <button class="btn ghost" onclick="alert('Demo only');">Rotate Keys</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Admin build 0xDASH · <a href="/logout">Logout</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>User Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bg:#0b1020; --panel:#0f172a; --edge:#1f2937; --muted:#94a3b8; --accent:#22d3ee; --ok:#10b981; --warn:#f59e0b; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:linear-gradient(120deg,#0b1020 0%, #111827 100%); color:#e5e7eb; }
+    header, footer { background:rgba(17,24,39,.65); border-bottom:1px solid rgba(255,255,255,.06); backdrop-filter: blur(6px); }
+    header { padding:14px 22px; position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center;}
+    a { color:#cbd5e1; text-decoration:none; }
+    main { display:grid; grid-template-columns: 260px 1fr; gap:22px; padding:24px; max-width:1200px; margin:0 auto; }
+    .side { background:#0f172a; border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; }
+    .side h3 { margin:0; padding:16px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .nav a { display:block; padding:12px 16px; border-bottom:1px dashed rgba(255,255,255,.06); }
+    .nav a:hover { background:#0b1220; }
+    .panel { background:#0f172a; border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:18px; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card { background:#0b1220; border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:16px; }
+    .muted { color:#94a3b8; }
+    table { width:100%; border-collapse: collapse; font-size:14px; }
+    th, td { text-align:left; padding:10px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .btn { cursor:pointer; border:0; background:linear-gradient(135deg, var(--accent), #60a5fa); color:#0b1220; font-weight:700; padding:10px 14px; border-radius:10px;}
+    .btn.ghost { background:transparent; color:#e5e7eb; border:1px solid rgba(255,255,255,.12); }
+    footer { color:#94a3b8; font-size:12px; text-align:center; padding:24px 12px; border-top:1px solid rgba(255,255,255,.06); }
+    .pill { font-size:11px; border:1px solid rgba(255,255,255,.15); padding:4px 8px; border-radius:999px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>User Portal</strong>
+    <nav>
+      <a href="/admin" class="pill">Admin</a>
+      <a href="/logout" class="pill" style="margin-left:8px;">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <aside class="side">
+      <h3>Navigation</h3>
+      <div class="nav">
+        <a href="#">Overview</a>
+        <a href="#">Notifications</a>
+        <a href="#">Security</a>
+        <a href="#">Billing</a>
+        <a href="#">Integrations</a>
+        <a href="#">API Keys</a>
+      </div>
+    </aside>
+
+    <section>
+      <div class="panel">
+        <h2>Welcome, {{ username }}!</h2>
+        <p class="muted">This is the user dashboard. Explore the widgets, settings, and logs below.</p>
+        <div class="cards" style="margin-top:14px;">
+          <div class="card">
+            <div class="muted">Profile Completeness</div>
+            <div style="margin-top:8px; background:#0f172a; height:10px; border-radius:6px; overflow:hidden;">
+              <div style="width:72%; height:100%; background:linear-gradient(90deg, var(--accent), #a78bfa);"></div>
+            </div>
+            <p class="muted" style="margin-top:6px;">72% complete</p>
+          </div>
+          <div class="card">
+            <div class="muted">Last Login</div>
+            <p style="margin:6px 0 0 0;">  {% if login_info %}
+                {{ login_info.time }} <br>IP {{ login_info.ip }}
+              {% else %}
+                No login info recorded.
+              {% endif %}</p>
+          </div>
+          <div class="card">
+            <div class="muted">Notifications</div>
+            <p style="margin:6px 0 0 0;">No new alerts</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Recent Activity</h3>
+        <table>
+          <thead><tr><th>Time</th><th>Action</th><th>Status</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>14:02</td><td>Session Created</td><td>OK</td><td>Browser: Chrome</td></tr>
+            <tr><td>14:01</td><td>Policy Check</td><td>OK</td><td>mfa=false (allowed)</td></tr>
+            <tr><td>13:59</td><td>API Request</td><td>WARN</td><td>Rate-limit near threshold</td></tr>
+            <tr><td>13:58</td><td>Audit Log</td><td>OK</td><td>Checksum valid</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:12px;" class="muted">Showing 4 of 4 results · <a href="#">View all</a></div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Account Settings</h3>
+        <form onsubmit="alert('Settings saved (demo).'); return false;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+            <div>
+              <label>Display Name</label>
+              <input type="text" value="{{ username }}" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#0b1220; color:#e5e7eb;">
+            </div>
+            <div>
+              <label>Timezone</label>
+              <input type="text" value="Australia/Melbourne" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#0b1220; color:#e5e7eb;">
+            </div>
+            <div>
+              <label>Language</label>
+              <input type="text" value="English (AU)" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#0b1220; color:#e5e7eb;">
+            </div>
+            <div>
+              <label>Theme</label>
+              <input type="text" value="Dark" style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#0b1220; color:#e5e7eb;">
+            </div>
+          </div>
+          <div style="margin-top:12px; display:flex; gap:10px;">
+            <button class="btn" type="submit">Save changes</button>
+            <button class="btn ghost" type="button">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Need admin tools? <a href="/admin">Go to Admin Dashboard</a> · <a href="/logout">Logout</a>
+  </footer>
+</body>
+</html>
